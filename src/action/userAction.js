@@ -18,6 +18,11 @@ const registerUser = ({ email, name, password }, navigate) => async (dispatch) =
     navigate("/login");
   } catch (error) {
     dispatch({ type: types.REGISTER_USER_FAIL, payload: error.message });
+    if (error.message === "User already exists") {
+      dispatch(commonUiActions.showToastMessage("이미 가입된 이메일입니다.", "error"));
+    } else {
+      dispatch(commonUiActions.showToastMessage("회원가입에 실패했습니다.", "error"));
+    }
   }
 };
 
