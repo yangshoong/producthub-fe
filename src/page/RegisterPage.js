@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { userActions } from "../action/userAction";
 import "../style/register.style.css";
+
 const RegisterPage = () => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -61,7 +62,7 @@ const RegisterPage = () => {
       {error && (
         <div>
           <Alert variant="danger" className="error-message">
-            {error}
+            {error === "이미 가입된 이메일입니다." ? error : "회원가입에 실패했습니다."}
           </Alert>
         </div>
       )}
