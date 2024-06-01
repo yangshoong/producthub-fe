@@ -14,10 +14,12 @@ const RegisterPage = () => {
     confirmPassword: "",
     policy: false,
   });
+  const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
   const [passwordError, setPasswordError] = useState("");
   const [policyError, setPolicyError] = useState(false);
   const error = useSelector((state) => state.user.error);
+  
 
   const register = (event) => {
     event.preventDefault();
@@ -56,13 +58,19 @@ const RegisterPage = () => {
     }
   };
 
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
+
 
   return (
     <Container className="register-area">
       {error && (
         <div>
           <Alert variant="danger" className="error-message">
-            {error === "이미 가입된 이메일입니다." ? error : "회원가입에 실패했습니다."}
+            {error}
           </Alert>
         </div>
       )}
